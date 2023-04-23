@@ -24,7 +24,7 @@ export const Cart = () => {
 		cart.forEach(item => {
 			total += item.Price
 		})
-		return total
+		return total.toLocaleString('ru')
 	}
 
 	return (
@@ -92,7 +92,7 @@ export const Cart = () => {
 						</Stack>
 					</Stack>
 				) : (
-					'Нет товаров добавьте'
+					'Нет товаров'
 				)}
 			</Menu>
 		</>

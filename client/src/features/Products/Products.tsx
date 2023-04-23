@@ -21,7 +21,11 @@ export const Products = () => {
 
 		return products && products.length ? (
 			products.map(product => (
-				<ProductsItem key={product.attributes.Slug} {...product.attributes} />
+				<ProductsItem
+					key={product.attributes.Slug}
+					id={product.id}
+					attributes={product.attributes}
+				/>
 			))
 		) : (
 			<Typography variant='h2'>Нет данных</Typography>

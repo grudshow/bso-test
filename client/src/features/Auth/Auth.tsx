@@ -1,8 +1,11 @@
 import { useNavigate } from 'react-router-dom'
 import { Button, Stack, Typography } from '@mui/material'
+import { useCheckToken } from '../../hooks/useCheckToken'
 
 export const Auth = () => {
 	const navigate = useNavigate()
+
+	useCheckToken()
 
 	return (
 		<Stack minHeight={'100vh'} alignItems={'center'} justifyContent='center'>

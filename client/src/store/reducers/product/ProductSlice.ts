@@ -1,16 +1,18 @@
 import { ProductAttributes, ProductResponse } from './../../../models/product.model'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { StatusType } from '../../../api/axios.types'
-import { getProducts } from './ProductThunks'
+import { getProduct, getProducts } from './ProductThunks'
 
 interface InitialState {
 	products: ProductResponse[] | null
 	status: StatusType
 	cart: ProductAttributes[]
+	product: ProductAttributes | null 
 }
 
 const initialState: InitialState = {
 	products: null,
+	product: null,
 	status: 'init',
 	cart: localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart') || '') : [],
 }
@@ -37,6 +39,16 @@ export const productSlice = createSlice({
 			state.status = 'loading'
 		},
 		[getProducts.rejected.type]: state => {
+			state.status = 'error'
+		},
+		[getProduct.fulfilled.type]: (state, action: PayloadAction<ProductAttributes>) => {
+			state.status = 'success'
+			state.product = action.payload
+		},
+		[getProduct.pending.type]: state => {
+			state.status = 'loading'
+		},
+		[getProduct.rejected.type]: state => {
 			state.status = 'error'
 		},
 	},

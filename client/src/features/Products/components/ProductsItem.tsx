@@ -2,14 +2,17 @@ import { MouseEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Box, Button, Card, Stack, Typography } from '@mui/material'
 
-import { ProductAttributes } from '../../../models/product.model'
+import { ProductResponse } from '../../../models/product.model'
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
 import { productActions } from '../../../store/reducers/product/ProductSlice'
 
 import CheckIcon from '@mui/icons-material/Check'
 
-export const ProductsItem = (props: ProductAttributes) => {
-	const { Slug, Title, Price, Image } = props
+export const ProductsItem = (props: ProductResponse) => {
+	const {
+		attributes: { Slug, Title, Price, Image },
+		id,
+	} = props
 
 	const cart = useAppSelector(state => state.productReducer.cart)
 
@@ -19,11 +22,13 @@ export const ProductsItem = (props: ProductAttributes) => {
 
 	const addToCart = (e: MouseEvent<HTMLButtonElement>) => {
 		e.stopPropagation()
-		dispatch(productActions.addToCart(props))
+		dispatch(productActions.addToCart({ ...props.attributes }))
 	}
 
+	const navigateToProduct = () => navigate(`/products/${id}`)
+
 	return (
-		<Card sx={{ p: 2, cursor: 'pointer' }} onClick={() => navigate(`/products/${Slug}`)}>
+		<Card sx={{ p: 2, cursor: 'pointer' }} onClick={navigateToProduct}>
 			<Stack gap={2} height='100%'>
 				<Box height={400} sx={{ flex: '1 0 auto' }}>
 					<img

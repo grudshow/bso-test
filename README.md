@@ -1,5 +1,6 @@
 # bso-test
 
-# Admin Panel:
+# Admin Panel Strapi:
+
 Username: admin@admin.com
 Password: Admin123

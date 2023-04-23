@@ -14,11 +14,11 @@ export const App = () => {
 	const user = useAppSelector(state => state.authReducer.user)
 	const navigate = useNavigate()
 
-	useEffect(() => {
-		if (token && user) {
-			navigate('/products')
-		}
-	}, [])
+	// useEffect(() => {
+	// 	if (token && user) {
+	// 		navigate('/products')
+	// 	}
+	// }, [])
 
 	return (
 		<Routes>
@@ -28,7 +28,7 @@ export const App = () => {
 			<Route element={<PrivateRouter />}>
 				<Route element={<Layout />}>
 					<Route path='/products' element={<ProductsPage />} />
-					<Route path='/products/:Slug' element={<ProductPage />} />
+					<Route path='/products/:id' element={<ProductPage />} />
 				</Route>
 			</Route>
 		</Routes>
